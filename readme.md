@@ -24,3 +24,6 @@ Toggler can be accessed using `:GularenTKDo` and `:GularenTKCancel`.
 Or ranged version using `:'<,'>GularenTKDoRange` and `:'<,'>GularenTKCancelRange`.
 
 [![](https://img.youtube.com/vi/t2wng_G7lKU/0.jpg)](https://youtu.be/t2wng_G7lKU)
+
+## Neovim
+Because this plugin written in vim9script (why not lua? because array index starts at 0) use [TJ transpiler](https://github.com/tjdevries/vim9jit) to use it.
