@@ -27,3 +27,8 @@ Or ranged version using `:'<,'>GularenTKDoRange` and `:'<,'>GularenTKCancelRange
 
 ## Neovim
 Because this plugin written in vim9script (why not lua? because array index starts at 0) use [TJ transpiler](https://github.com/tjdevries/vim9jit) to use it.
+
+## Backlog Ideas
+- Replace `gd` functionality to go to heading id if cursor under a local linker.
+- Execute code under the cursor
+
