@@ -1,12 +1,15 @@
 # Gularen Toolkit
 
 ## Features
-- `kode` text-object
-- `checklist` toggler
+- `code` text-object
+- `list` auto-insert bullet and toggler
 
-### `kode` text-object
+### `code` Text-Object
 Can be accessed using `ik` and `ak`
 
-### `checklist` toggler
-Can be accessed using `:GularenTKDo` and `:GularenTKCancel`.
+### `list` Auto-Insert Bullet and Toggler
+Auto-insert will be called on `<cr>` on insert mode and `o` on normal mode.
+
+Toggler can be accessed using `:GularenTKDo` and `:GularenTKCancel`.
 Or ranged version using `:'<,'>GularenTKDoRange` and `:'<,'>GularenTKCancelRange`.
+
