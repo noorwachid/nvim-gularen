@@ -19,11 +19,6 @@ export def Toggle(query: any, state: string, ignore_self: bool = v:false)
 enddef
 
 export def ToggleRange(begin_line: number, end_line: number, state: string)
-	if begin_line == 0
-		echo 'no visual selection were found'
-		return
-	endif
-
 	var begin_state = state
 	var begin_result = matchlist(getline(begin_line), '^\t*\[\([ vx]\)\] ')
 	

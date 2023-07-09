@@ -1,10 +1,14 @@
 vim9script
 
+import '../autoload/gularentk/formatter.vim'
 import '../autoload/gularentk/list.vim'
 import '../autoload/gularentk/code.vim'
 
-command GularenTKDo     call Toggle('.', 'v')
-command GularenTKCancel call Toggle('.', 'x')
+command GularenTKFormat call gularentk#formatter#Format(1, line('$'))
+command -range GularenTKFormatRange call gularentk#formatter#Format(<line1>, <line2>)
+
+command GularenTKDo     call gularentk#list#Toggle('.', 'v')
+command GularenTKCancel call gularentk#list#Toggle('.', 'x')
 
 command -range GularenTKDoRange     call ToggleRange(<line1>, <line2>, 'v')
 command -range GularenTKCancelRange call ToggleRange(<line1>, <line2>, 'x')
