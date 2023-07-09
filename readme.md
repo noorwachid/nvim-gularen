@@ -1,4 +1,4 @@
-# Gularen Toolkit
+# Vim Gularen Toolkit
 
 ## Features
 - Formater
