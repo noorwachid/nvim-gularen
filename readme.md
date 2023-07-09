@@ -31,4 +31,5 @@ Because this plugin written in vim9script (why not lua? because array index star
 ## Backlog Ideas
 - Replace `gd` functionality to go to heading id if cursor under a local linker.
 - Execute code under the cursor
+- Generate TOC
 
