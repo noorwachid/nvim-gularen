@@ -3,6 +3,7 @@
 ## Features
 - Formater
 - Code text-object
+- Run code inside codeblock
 - List marker auto-inserter and toggler
 - Goto heading definition
 
@@ -29,10 +30,19 @@ Or ranged version using `:'<,'>GularenTKDoRange` and `:'<,'>GularenTKCancelRange
 ### Goto Heading Definition
 On normal mode press `gd`
 
+### Run Code Inside Codeblock
+Can be accessed using `:GularenTKRun` inside codeblock
+
+To add more runner:
+~~~ vim
+gularentk#code#SetRunner({
+    'out': 'py',
+    'command': ['python3']
+})
+~~~
+
 ## Neovim
 Because this plugin written in vim9script (why not lua? because array index starts at 0) use [TJ transpiler](https://github.com/tjdevries/vim9jit) to use it.
 
 ## Backlog Ideas
-- Execute code under the cursor
 - Generate TOC
-
