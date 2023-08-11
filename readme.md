@@ -3,8 +3,9 @@ Neovim toolkit for editing Gularen markup language
 
 ## Features
 - Format 
+  Command: `GularenFormat`
 - Run codeblock
-  command: `GularenRun`
+  Command: `GularenRun`
   To add more runner:
   ~~~ lua
   local gularen = require('gularen')
