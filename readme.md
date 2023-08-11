@@ -14,8 +14,8 @@ Neovim toolkit for editing Gularen markup language
       command = { 'node' }
   })
   ~~~
-- Auto-insert list marker
-- Jump to heading definition
+- Automate list marker
+- Got to heading definition
 
 ## Backlog Ideas
 - Generate TOC
