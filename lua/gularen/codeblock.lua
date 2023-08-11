@@ -44,7 +44,7 @@ function M.run()
 
 	local rule = M.runners[lang]
 	local source = table.concat(vim.fn.getline(line_begin + 1, line_end - 1), '\n')
-	local signature_out = indent .. minus .. ' ' .. rule['out']
+	local signature_out = indent .. minus .. ' ' .. rule.out
 
 	if line_end == vim.fn.line('$') or vim.fn.getline(line_end + 1) ~= signature_out then
 		vim.fn.append(line_end, signature_out)
@@ -59,7 +59,8 @@ function M.run()
 			vim.fn.feedkeys(':' .. (line_out_begin + 1) .. ',' .. (line_out_end - 1) .. 'd\n')
 		end
 	end
-	
+
+	vim.fn.cursor(ori_line, ori_col)
 
 	local line_out = line_end + 1
 	local line_out_offset = 0
@@ -73,7 +74,7 @@ function M.run()
 		end
 	end
 
-	local job_id = vim.fn.jobstart(rule['command'], {
+	local job_id = vim.fn.jobstart(rule.command, {
 		stderr_buffered = true,
 		stdout_buffered = true,
 		on_stderr = on_out,
