@@ -1,15 +1,17 @@
 local M = {}
 
-M.codeblock = {}
-
-M.codeblock.rules = {
-	['python'] = {
-		['out'] = 'python-out',
-		['command'] = { 'python3' }
+M.runners = {
+	python = {
+		out = 'python-out',
+		command = { 'python3' }
 	}
 }
 
-function M.codeblock.run()
+function M.set_runner(lang, rule)
+	M.runners[lang] = rule
+end
+
+function M.run()
 	local ori_line = vim.fn.line('.')
 	local ori_col = vim.fn.col('.')
 
@@ -36,11 +38,11 @@ function M.codeblock.run()
 		return print('empty codeblock')
 	end
 
-	if not M.codeblock.rules[lang] then
+	if not M.runners[lang] then
 		return print('the runner for ' .. lang .. ' is not configured')
 	end
 
-	local rule = M.codeblock.rules[lang]
+	local rule = M.runners[lang]
 	local source = table.concat(vim.fn.getline(line_begin + 1, line_end - 1), '\n')
 	local signature_out = indent .. minus .. ' ' .. rule['out']
 
