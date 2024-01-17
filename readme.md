@@ -8,11 +8,16 @@ Neovim toolkit for editing Gularen markup language
   Command: `GularenRun`
   To add more runner:
   ~~~ lua
-  local gularen = require('gularen')
+  local codeblock = require('gularen.codeblock')
+
+  codeblock.set_runner('js', {
+  	out = 'js-out',
+  	command = { 'node' }
+  })
   
-  gularen.set_runner('javascript', {
-      out = 'javascript-out',
-      command = { 'node' }
+  codeblock.set_runner('http-request', {
+  	out = 'http-response',
+  	command = { 'http-resolver' }
   })
   ~~~
 - Automate list marker

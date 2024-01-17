@@ -81,6 +81,18 @@ function M.run()
 		on_stdout = on_out,
 		on_exit = function()
 			vim.fn.cursor(ori_line, ori_col)
+
+			if rule.command_after then
+				local job_id = vim.fn.jobstart(rule.command_after, {
+					stderr_buffered = true,
+					stdout_buffered = true,
+					on_stderr = on_out,
+					on_stdout = on_out,
+					on_exit = function()
+						vim.fn.cursor(ori_line, ori_col)
+					end
+				})
+			end
 		end
 	})
 
