@@ -12,6 +12,7 @@ Neovim toolkit for editing Gularen markup language
   https://github.com/noorwachid/nvim-gularen/assets/42460975/1f990e84-e18b-44ec-a5fc-007dcd0da57d
 
   Command: `GularenRun`
+  
   To add more runner:
   ~~~ lua
   local codeblock = require('gularen.codeblock')
