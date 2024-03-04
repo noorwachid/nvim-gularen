@@ -22,7 +22,11 @@ function M.goto_definition()
 
 	if link:sub(1, 1) == '>' then
 		local keyword = '> ' .. link:sub(2)
-		return vim.fn.search(keyword, 'eW')
+		local line = vim.fn.search(keyword, 'eW')
+		if line == 0 then
+			vim.fn.search(keyword, 'beW')
+		end
+		return
 	end
 
 	local segments = vim.fn.split(link, '>')
@@ -31,10 +35,12 @@ function M.goto_definition()
 	vim.cmd(':e ' .. segments[1])
 
 	if #segments == 2 then
-		vim.print(segments[2])
-
 		local keyword = '> ' .. segments[2]
-		return vim.fn.search(keyword, 'eW')
+		local line = vim.fn.search(keyword, 'eW')
+		if line == 0 then
+			vim.fn.search(keyword, 'beW')
+		end
+		return
 	end
 end
 
