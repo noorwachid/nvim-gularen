@@ -1,6 +1,14 @@
 # Neovim Gularen
 Neovim toolkit for editing Gularen markup language
 
+## Installation
+``` lua
+use {
+    'noorwachid/nvim-gularen',
+    requires = {'nvim-treesitter/nvim-treesitter'}
+}
+```
+
 ## Features
 - Format
 
@@ -17,15 +25,10 @@ Neovim toolkit for editing Gularen markup language
   ~~~ lua
   local codeblock = require('gularen.codeblock')
 
-  codeblock.set_runner('js', {
-  	out = 'js-out',
-  	command = { 'node' }
-  })
+  codeblock.add('js', { 'node' })
   
-  codeblock.set_runner('http-request', {
-  	out = 'http-response',
-  	command = { 'http-resolver' }
-  })
+  -- highlight the output
+  codeblock.add_pair('http-request', 'http-response', { 'http-resolver' })
   ~~~
 - Automate list marker
   
@@ -35,5 +38,6 @@ Neovim toolkit for editing Gularen markup language
   `gd` in normal mode
 
 ## Backlog Ideas
-- Scheduler summary
+- Agenda summary
+- Todo list summary
 - Generate TOC

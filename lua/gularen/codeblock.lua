@@ -1,102 +1,166 @@
 local M = {}
 
-M.runners = {
-	python = {
-		out = 'python-out',
-		command = { 'python3' }
-	}
-}
+local ts = vim.treesitter
+local api = vim.api
 
-function M.set_runner(lang, rule)
-	M.runners[lang] = rule
+M.db = {}
+
+--- @param from string
+--- @param command string[]
+function M.add(from, command)
+	if #command == 0 then
+		print(('command for %s block cannot be empty'):format(from))
+	end
+
+	M.db[from] = { nil, command }
 end
 
+--- @param from string
+--- @param to string
+--- @param command string[]
+function M.add_pair(from, to, command)
+	if #command == 0 then
+		print(('command for %s block cannot be empty'):format(from))
+	end
+
+	M.db[from] = { to, command }
+end
+
+M.add('sh', { 'sh' })
+M.add('python', { 'python3' })
+M.add('js', { 'node' })
+M.add('php', { 'php' })
+
 function M.run()
-	local ori_line = vim.fn.line('.')
-	local ori_col = vim.fn.col('.')
-
-	if vim.fn.search('^\t*---\\+ [a-z0-9-]\\+$', 'bcW') == 0 then
-		vim.fn.cursor(ori_line, ori_col)
-		return print('no labeled codeblock were found')
+	local node = ts.get_node()
+	if node == nil then
+		return print('no codeblock were found in nearest cursor')
 	end
 
-	local signature = vim.fn.matchlist(vim.fn.getline('.'), '^\\(\t*\\)\\(---\\+\\) \\([a-z0-9-]\\+\\)')
-	local indent = signature[2]
-	local minus = signature[3]
-	local lang = signature[4]
-	local line_begin = vim.fn.line('.')
-	local line_end = vim.fn.search('^' .. indent .. minus .. '$', 'eW')
-
-	if line_end == 0 then
-		vim.fn.cursor(ori_line, ori_col)
-		return print('invalid codeblock syntax')
+	if node:type() == 'code_content' or
+		node:type() == 'code_lang' or
+		node:type() == 'fence_open' or
+		node:type() == 'fence_close' then
+		node = node:parent()
 	end
 
-	vim.fn.cursor(ori_line, ori_col)
-
-	if line_begin + 1 == line_end then
-		return print('empty codeblock')
+	if node:type() ~= 'code_block_lang' then
+		return print('no codeblock were found in nearest cursor')
 	end
 
-	if not M.runners[lang] then
-		return print('the runner for ' .. lang .. ' is not configured')
+	local lang = node:named_child(1)
+	if lang == nil then
+		return print('broken codeblock: lang')
 	end
 
-	local rule = M.runners[lang]
-	local source = table.concat(vim.fn.getline(line_begin + 1, line_end - 1), '\n')
-	local signature_out = indent .. minus .. ' ' .. rule.out
-
-	if line_end == vim.fn.line('$') or vim.fn.getline(line_end + 1) ~= signature_out then
-		vim.fn.append(line_end, signature_out)
-		vim.fn.append(line_end + 1, indent .. minus)
-	elseif vim.fn.getline(line_end + 1) == signature_out then
-		vim.fn.cursor(line_end + 1, 1)
-
-		local line_out_begin = line_end + 1
-		local line_out_end = vim.fn.search('^' .. indent .. minus .. '$', 'eW')
-
-		if line_out_begin + 1 ~= line_out_end then
-			vim.fn.feedkeys(':' .. (line_out_begin + 1) .. ',' .. (line_out_end - 1) .. 'd\n')
-		end
+	local content = node:named_child(2)
+	if content == nil then
+		return print('broken codeblock: content')
 	end
 
-	vim.fn.cursor(ori_line, ori_col)
+	local fence_close = node:named_child(3)
+	if fence_close == nil then
+		return print('broken codeblock: fence_close')
+	end
 
-	local line_out = line_end + 1
-	local line_out_offset = 0
+	local from = ts.get_node_text(lang, 0);
 
-	local on_out = function(_, data)
-		if data and #data > 1 then
-			for offset = 1, #data - 1 do
-				vim.fn.append(line_out + line_out_offset, data[offset])
-				line_out_offset = line_out_offset + 1
+	if M.db[from] == nil then
+		return print(('there is no associated command to run %s block'):format(from))
+	end
+
+	local to = M.db[from][1]
+	local command = M.db[from][2]
+
+	local to_fence_open = '---'
+	if to ~= nil then
+		to_fence_open = '--- ' .. to
+	end
+
+	local fence_close_row, _, _ = fence_close:start()
+
+	local start_row = fence_close_row + 1
+	local end_row = fence_close_row + 1
+
+	local result = node:next_named_sibling()
+	if result ~= nil then
+		if to == nil and result:type() == 'code_block' then
+			local fence_open_nolang = result:child(0)
+			if fence_open_nolang ~= nil then
+				local row_nolang, _, _ = fence_open_nolang:end_()
+				start_row = row_nolang
+			end
+
+			local fence_close_nolang = result:child(2)
+			if fence_close_nolang ~= nil then
+				local row_nolang, _, _ = fence_close_nolang:start()
+				end_row = row_nolang + 1
 			end
 		end
-	end
 
-	local job_id = vim.fn.jobstart(rule.command, {
-		stderr_buffered = true,
-		stdout_buffered = true,
-		on_stderr = on_out,
-		on_stdout = on_out,
-		on_exit = function()
-			vim.fn.cursor(ori_line, ori_col)
-
-			if rule.command_after then
-				local job_id = vim.fn.jobstart(rule.command_after, {
-					stderr_buffered = true,
-					stdout_buffered = true,
-					on_stderr = on_out,
-					on_stdout = on_out,
-					on_exit = function()
-						vim.fn.cursor(ori_line, ori_col)
+		if to ~= nil and result:type() == 'code_block_lang' then
+			if result:child(1) ~= nil and result:child(1):type() == 'code_lang' then
+				if ts.get_node_text(result:child(1), 0) == to then
+					local fence_open_nolang = result:child(0)
+					if fence_open_nolang ~= nil then
+						local row_nolang, _, _ = fence_open_nolang:end_()
+						start_row = row_nolang
 					end
-				})
+
+					local fence_close_nolang = result:child(3)
+					if fence_close_nolang ~= nil then
+						local row_nolang, _, _ = fence_close_nolang:start()
+						end_row = row_nolang + 1
+					end
+				end
 			end
 		end
+	end
+
+	api.nvim_buf_set_lines(0, start_row, end_row, false, {
+		'---',
+		'please wait...',
+		'---',
 	})
 
-	vim.fn.chansend(job_id, source)
+	local input = ts.get_node_text(content, 0)
+
+	local write = function(_, data)
+		local i = #data
+
+		while i > 0 do
+			if data[i] ~= '' then
+				break
+			end
+			i = i - 1
+		end
+
+		if i == 0 then
+			return
+		end
+
+		api.nvim_buf_set_lines(0, start_row, start_row + 3, false, { to_fence_open })
+		local next_row = start_row + 1
+
+		local j = 1
+		while j <= i do
+			api.nvim_buf_set_lines(0, next_row, next_row, false, { data[j] })
+			j = j + 1
+			next_row = next_row + 1
+		end
+
+		api.nvim_buf_set_lines(0, next_row, next_row, false, { '---' })
+		end_row = end_row + 1
+	end
+
+	local job_id = vim.fn.jobstart(command, {
+		stderr_buffered = true,
+		stdout_buffered = true,
+		on_stderr = write,
+		on_stdout = write,
+	})
+
+	vim.fn.chansend(job_id, input)
 	vim.fn.chanclose(job_id, 'stdin')
 end
 
