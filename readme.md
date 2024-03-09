@@ -9,6 +9,10 @@ use {
 }
 ```
 
+## Syntax Highlighting
+1. Use [tree-sitter-gularen parser](https://github.com/noorwachid/tree-sitter-gularen)
+1. Run `:TSInstall gularen` 
+
 ## Features
 - Format
 
