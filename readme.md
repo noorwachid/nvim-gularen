@@ -2,16 +2,14 @@
 Neovim toolkit for editing Gularen markup language
 
 ## Installation
-``` lua
-use {
-    'noorwachid/nvim-gularen',
-    requires = {'nvim-treesitter/nvim-treesitter'}
-}
-```
-
-## Syntax Highlighting
-1. Use [tree-sitter-gularen parser](https://github.com/noorwachid/tree-sitter-gularen)
-1. Run `:TSInstall gularen` 
+1. With packer add this to the package list
+   ```lua
+   use {
+       'noorwachid/nvim-gularen',
+       requires = {'nvim-treesitter/nvim-treesitter'}
+   }
+   ```
+2. Then run `:TSInstall gularen`
 
 ## Features
 - Format
