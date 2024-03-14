@@ -5,16 +5,16 @@
 
 (bullet) @keyword
 (index) @number
-(v) @diff.plus
-(x) @diff.minus
+(x) @markup.list.checked
 
 (bold) @markup.strong
 (italic) @markup.italic
-(monospaced) @string
+(highlighted) @diff.plus
 
 (line_break) @diff.minus
 (page_break) @diff.minus
 (dinkus) @keyword
+(coloncolon) @keyword
 
 (code_inline) @markup.raw
 
@@ -31,7 +31,7 @@
 (exclamation) @operator
 (question) @operator
 (caret) @operator
-(equal) @operator
+(colon) @operator
 
 (angle_open) @operator
 (angle_close) @operator
@@ -49,7 +49,6 @@
 (annotation_colon) @operator
 (annotation_value) @string
 
-(footnote_desc (resource) @function)
 (resource) @markup.link.url
 (account_tag) @markup.link.url
 (hash_tag) @markup.link.url
