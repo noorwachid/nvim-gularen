@@ -1,5 +1,5 @@
 # Neovim Gularen
-Neovim toolkit for editing Gularen markup language
+Neovim toolkit for editing [Gularen markup language](https://github.com/noorwachid/gularen)
 
 ## Installation
 1. With packer add this to the package list
