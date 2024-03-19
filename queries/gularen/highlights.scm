@@ -1,56 +1,82 @@
-(chapter) @markup.heading.1
-(section) @markup.heading.2
-(subsection) @markup.heading.3
-(subtitle) @operator
+(text) @spell
 
-(bullet) @keyword
+(section) @markup.heading.1
+
+(subsection) @markup.heading.2
+
+(subsubsection) @markup.heading.3
+
+(subtitle) @markup.heading.4
+
+(bullet) @markup.list
+
 (index) @number
+
 (x) @markup.list.checked
 
 (bold) @markup.strong
+
 (italic) @markup.italic
+
 (highlighted) @diff.plus
 
-(line_break) @diff.minus
-(page_break) @diff.minus
-(dinkus) @keyword
-(coloncolon) @keyword
+[
+  (line_break)
+  (page_break)
+  (dinkus)
+] @punctuation.special
 
 (code_inline) @markup.raw
 
-(code_content) @markup.raw.block
+(code_block
+  (code_block_content) @markup.raw.block)
 
-(code_lang) @operator
-(fence_open) @operator
-(fence_close) @operator
+(code_block_label) @label
 
-(link_label (label) @markup.link.url)
+([
+  (fence_open)
+  (fence_close)
+] @markup.raw.block
+  (#set! conceal ""))
+
+(link_labeled
+  (label) @markup.link.url)
+
 (admon_label) @function
-(datetime_content) @string.escape
 
-(exclamation) @operator
-(question) @operator
-(caret) @operator
-(colon) @operator
+(datetime_content) @string.special
 
-(angle_open) @operator
-(angle_close) @operator
-(square_open) @operator
-(square_close) @operator
-(curly_open) @operator
-(curly_close) @operator
-(paren_open) @operator
-(paren_close) @operator
-(slash) @operator
+[
+  (exclamation)
+  (question)
+  (caret)
+] @punctuation.special
 
-(comment) @comment
-(annotation) @comment
-(annotation_key) @annotation
-(annotation_colon) @operator
+[
+  (angle_open)
+  (angle_close)
+  (square_open)
+  (square_close)
+  (paren_open)
+  (paren_close)
+] @punctuation.bracket
+
+(slash) @punctuation.delimiter
+
+(comment) @comment @spell
+
+(annotation) @comment.documentation
+
+(annotation_key) @attribute
+
+(annotation_colon) @punctuation.delimiter
+
 (annotation_value) @string
 
 (resource) @markup.link.url
+
 (account_tag) @markup.link.url
+
 (hash_tag) @markup.link.url
 
 (blockquote) @markup.quote

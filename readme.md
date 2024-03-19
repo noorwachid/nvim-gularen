@@ -9,7 +9,8 @@ Neovim toolkit for editing [Gularen markup language](https://github.com/noorwach
        requires = {'nvim-treesitter/nvim-treesitter'}
    }
    ```
-2. Then run `:TSInstall gularen`
+2. `nvim /tmp/sample.gularen`
+3. Then run `:TSInstall gularen`
 
 ## Features
 - Format
