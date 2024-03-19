@@ -13,7 +13,7 @@ local config = require('nvim-treesitter.parsers').get_parser_configs()
 
 config.gularen = {
 	install_info = {
-		url = '/Users/Noor/dev/projects/personal/tree-sitter-gularen',
+		url = 'https://github.com/noorwachid/tree-sitter-gularen',
 		files = { 'src/parser.c', 'src/scanner.c' },
 	},
 }
