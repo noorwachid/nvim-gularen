@@ -50,6 +50,8 @@
 
 (datetime_content) @string.special
 
+(escape) @string.escape
+
 [
   (exclamation)
   (question)
