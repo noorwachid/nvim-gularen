@@ -1,1 +1,1 @@
-au BufNewFile,BufRead *.gr,*.gularen setl ft=gularen | setl commentstring=~%s
+au BufNewFile,BufRead *.gr,*.gularen setl ft=gularen | setl commentstring=~%s | setl noexpandtab

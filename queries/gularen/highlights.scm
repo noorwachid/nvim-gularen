@@ -23,8 +23,12 @@
 [
   (line_break)
   (page_break)
-  (dinkus)
 ] @punctuation.special
+
+[
+ (dinkus) 
+ (coloncolon)
+] @keyword
 
 (code_inline) @markup.raw
 
