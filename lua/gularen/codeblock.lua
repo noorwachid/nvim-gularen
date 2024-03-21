@@ -37,14 +37,14 @@ function M.run()
 		return print('no codeblock were found in nearest cursor')
 	end
 
-	if node:type() == 'code_content' or
-		node:type() == 'code_lang' or
+	if node:type() == 'code_block_content' or
+		node:type() == 'code_block_label' or
 		node:type() == 'fence_open' or
 		node:type() == 'fence_close' then
 		node = node:parent()
 	end
 
-	if node:type() ~= 'code_block_lang' then
+	if node:type() ~= 'code_block_labeled' then
 		return print('no codeblock were found in nearest cursor')
 	end
 
@@ -98,8 +98,8 @@ function M.run()
 			end
 		end
 
-		if to ~= nil and result:type() == 'code_block_lang' then
-			if result:child(1) ~= nil and result:child(1):type() == 'code_lang' then
+		if to ~= nil and result:type() == 'code_block_labeled' then
+			if result:child(1) ~= nil and result:child(1):type() == 'code_block_label' then
 				if ts.get_node_text(result:child(1), 0) == to then
 					local fence_open_nolang = result:child(0)
 					if fence_open_nolang ~= nil then
