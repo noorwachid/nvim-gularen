@@ -18,6 +18,8 @@
 
 (italic) @markup.italic
 
+(underlined) @markup.underline
+
 (highlighted) @diff.plus
 
 [
@@ -67,8 +69,6 @@
   (paren_close)
 ] @punctuation.bracket
 
-(slash) @punctuation.delimiter
-
 (comment) @comment @spell
 
 (annotation) @comment.documentation
@@ -84,5 +84,3 @@
 (account_tag) @markup.link.url
 
 (hash_tag) @markup.link.url
-
-(blockquote) @markup.quote
