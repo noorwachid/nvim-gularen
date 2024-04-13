@@ -18,8 +18,6 @@
 
 (italic) @markup.italic
 
-(underlined) @markup.underline
-
 (highlighted) @diff.plus
 
 [
