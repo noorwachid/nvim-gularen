@@ -1,10 +1,10 @@
 (text) @spell
 
-(section) @markup.heading.1
+(chapter) @markup.heading.1
 
-(subsection) @markup.heading.2
+(section) @markup.heading.2
 
-(subsubsection) @markup.heading.3
+(subsection) @markup.heading.3
 
 (subtitle) @markup.heading.4
 
@@ -18,55 +18,47 @@
 
 (italic) @markup.italic
 
-(underlined) @markup.underline
+(underline) @markup.underline
 
-(highlighted) @diff.plus
+(highlight) @diff.delta
 
-[
-  (line_break)
-  (page_break)
-] @punctuation.special
+(break) @punctuation.special
 
 [
- (dinkus) 
- (coloncolon)
+	(dinkus) 
+	(coloncolon)
 ] @keyword
 
 (code_inline) @markup.raw
 
 (code_block
-  (code_block_content) @markup.raw.block)
+	(code_block_content) @markup.raw.block)
 
 (code_block_label) @label
 
-([
-  (fence_open)
-  (fence_close)
-] @markup.raw.block
-  (#set! conceal ""))
-
 (link_labeled
-  (label) @markup.link.url)
+	(label) @markup.link.url)
+
+(admon_marker) @punctuation.special
 
 (admon_label) @function
 
-(datetime_content) @string.special
+(datetime) @string.special
 
 (escape) @string.escape
 
 [
-  (exclamation)
-  (question)
-  (caret)
+	(exclamation)
+	(question)
+	(caret)
+	(ampersand)
 ] @punctuation.special
 
 [
-  (angle_open)
-  (angle_close)
-  (square_open)
-  (square_close)
-  (paren_open)
-  (paren_close)
+	(square_open)
+	(square_close)
+	(paren_open)
+	(paren_close)
 ] @punctuation.bracket
 
 (comment) @comment @spell
@@ -75,9 +67,13 @@
 
 (annotation_key) @attribute
 
-(annotation_colon) @punctuation.delimiter
+(annotation_assign) @punctuation.delimiter
 
 (annotation_value) @string
+
+(reference) @comment.documentation
+
+(reference_key) @markup.link.url
 
 (resource) @markup.link.url
 
