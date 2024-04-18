@@ -22,11 +22,14 @@
 
 (highlight) @diff.delta
 
+(change_added) @diff.plus
+(change_removed) @diff.minus
+
 (break) @punctuation.special
 
 [
 	(dinkus) 
-	(coloncolon)
+	(equal)
 ] @keyword
 
 (code_inline) @markup.raw
@@ -39,11 +42,11 @@
 (link_labeled
 	(label) @markup.link.url)
 
-(admon_marker) @punctuation.special
-
-(admon_label) @function
+(admonition) @function
 
 (datetime) @string.special
+(date) @string.special
+(time) @string.special
 
 (escape) @string.escape
 
@@ -71,9 +74,7 @@
 
 (annotation_value) @string
 
-(reference) @comment.documentation
-
-(reference_key) @markup.link.url
+(reference) @markup.link.url
 
 (resource) @markup.link.url
 
