@@ -25,9 +25,8 @@
 (change_added) @diff.plus
 (change_removed) @diff.minus
 
-(break) @punctuation.special
-
 [
+	(break)
 	(dinkus) 
 	(equal)
 ] @keyword
@@ -55,6 +54,9 @@
 	(question)
 	(caret)
 	(ampersand)
+	(hyphen)
+	(en_dash)
+	(em_dash)
 ] @punctuation.special
 
 [
@@ -75,6 +77,8 @@
 (annotation_value) @string
 
 (reference) @markup.link.url
+
+(reference (ampersand) @markup.link.url)
 
 (resource) @markup.link.url
 
