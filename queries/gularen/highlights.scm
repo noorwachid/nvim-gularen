@@ -41,8 +41,6 @@
 (link_labeled
 	(label) @markup.link.url)
 
-(admonition) @function
-
 (datetime) @string.special
 (date) @string.special
 (time) @string.special
@@ -75,10 +73,6 @@
 (annotation_assign) @punctuation.delimiter
 
 (annotation_value) @string
-
-(reference) @markup.link.url
-
-(reference (ampersand) @markup.link.url)
 
 (resource) @markup.link.url
 
