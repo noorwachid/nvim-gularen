@@ -6,8 +6,6 @@
 
 (subsection) @markup.heading.3
 
-(subtitle) @markup.heading.4
-
 (bullet) @markup.list
 
 (index) @number
