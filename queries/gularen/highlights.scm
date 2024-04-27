@@ -20,11 +20,6 @@
 
 (underline) @markup.underline
 
-(highlight) @diff.delta
-
-(change_added) @diff.plus
-(change_removed) @diff.minus
-
 [
 	(break)
 	(dinkus) 
