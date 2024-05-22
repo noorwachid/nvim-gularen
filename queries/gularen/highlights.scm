@@ -40,6 +40,8 @@
 
 (escape) @string.escape
 
+(quote) @string
+
 [
 	(exclamation)
 	(question)
