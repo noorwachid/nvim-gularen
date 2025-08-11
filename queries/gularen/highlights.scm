@@ -1,10 +1,8 @@
-(text) @spell
+(section) @markup.heading.1
 
-(chapter) @markup.heading.1
+(subsection) @markup.heading.2
 
-(section) @markup.heading.2
-
-(subsection) @markup.heading.3
+(subsubsection) @markup.heading.3
 
 (bullet) @markup.list
 
@@ -12,65 +10,30 @@
 
 (x) @markup.list.checked
 
-(bold) @markup.strong
+(strong_emphasis) @markup.strong
 
-(italic) @markup.italic
+(admon_label) @markup.strong
 
-(underline) @markup.underline
+(emphasis) @markup.italic
 
-[
-	(break)
-	(dinkus) 
-	(equal)
-] @keyword
-
-(code_inline) @markup.raw
-
-(code_block
-	(code_block_content) @markup.raw.block)
-
-(code_block_label) @label
-
-(link_labeled
-	(label) @markup.link.url)
-
-(datetime) @string.special
-(date) @string.special
-(time) @string.special
+(break) @keyword
 
 (escape) @string.escape
 
-(quote) @string
+(comment) @comment
 
-[
-	(exclamation)
-	(question)
-	(caret)
-	(ampersand)
-	(hyphen)
-	(en_dash)
-	(em_dash)
-] @punctuation.special
+(metadata
+	(id) @attribute)
 
-[
-	(square_open)
-	(square_close)
-	(paren_open)
-	(paren_close)
-] @punctuation.bracket
+(string) @string
 
-(comment) @comment @spell
+(func
+	(id) @function.call)
 
-(annotation) @comment.documentation
+(table
+  (table_row
+	(table_cell) @markup.heading)
+  (table_bar))
 
-(annotation_key) @attribute
-
-(annotation_assign) @punctuation.delimiter
-
-(annotation_value) @string
-
-(resource) @markup.link.url
-
-(account_tag) @markup.link.url
-
-(hash_tag) @markup.link.url
+(code_inline
+  (source_inline) @markup.raw)

@@ -36,11 +36,3 @@ Neovim toolkit for editing [Gularen markup language](https://github.com/noorwach
 - Automate list marker
   
   https://github.com/noorwachid/nvim-gularen/assets/42460975/1e6c796e-3ee2-438e-9242-b7cab17ab47f
-
-- Go to heading definition
-  `gd` in normal mode
-
-## Backlog Ideas
-- Agenda summary
-- Todo list summary
-- Generate TOC
