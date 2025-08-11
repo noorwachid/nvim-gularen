@@ -30,10 +30,8 @@
 (func
 	(id) @function.call)
 
-(table
-  (table_row
-	(table_cell) @markup.heading)
-  (table_bar))
-
 (code_inline
   (source_inline) @markup.raw)
+
+(resource_link) @markup.link.url
+(resource_label) @markup.link.url
