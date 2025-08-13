@@ -1,8 +1,8 @@
-(section) @markup.heading.1
+(section_title) @markup.heading.1
 
-(subsection) @markup.heading.2
+(subsection_title) @markup.heading.2
 
-(subsubsection) @markup.heading.3
+(subsubsection_title) @markup.heading.3
 
 (bullet) @markup.list
 
